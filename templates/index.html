@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Covid HMS
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="section upload">
+            <h2>Enter your city</h2>
+            <form action="/" id="form" method="post">
+                <input type="text" name="city">
+                <button type="submit" id="sub" class="button">Submit</button>
+            </form>
+            {% if show %}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Area</th>
+                            <th>Staff</th>
+                            <th>Normal beds</th>
+                            <th>Ventilator beds</th>
+                            <th>Oxygen cylinders</th>
+                            <th>Nebulizers</th>
+                            <th>Phone number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in data %}
+                            <tr>
+                                <td>{{ item[1] }}</td>
+                                <td>{{ item[2] }}</td>
+                                <td>{{ item[3] }}</td>
+                                <td>{{ item[5] }}</td>
+                                <td>{{ item[7] }}</td>
+                                <td>{{ item[8] }}</td>
+                                <td>{{ item[9] }}</td>
+                                <td>{{ item[10] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
