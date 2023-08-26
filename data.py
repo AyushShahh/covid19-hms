@@ -16,6 +16,24 @@ def hospitals(mydb):
     db.execute('SELECT * FROM hospitals')
     return db.fetchall()
   
+def update_hospital(mydb, hospital_id, t_nbeds, a_nbeds, t_vbeds, a_vbeds, staff, oxygen, nebulizer):
+  update_query = """
+        UPDATE hospitals
+        SET
+            staff = staff + %s,
+            total_nbed = total_nbed + %s,
+            ava_nbed = ava_nbed + %s,
+            total_vbed = total_vbed + %s,
+            ava_vbed = ava_vbed + %s,
+            oxygen_cylinders = oxygen_cylinders + %s,
+            nebulizers = nebulizers + %s
+        WHERE id = %s;
+    """
+  with mydb.cursor() as db:
+    db.execute(update_query, (staff, t_nbeds, a_nbeds, t_vbeds, a_vbeds, oxygen, nebulizer, hospital_id))
+    mydb.commit()
+
+  
 def people(mydb):
   with mydb.cursor() as db:
     db.execute('SELECT * FROM people')
