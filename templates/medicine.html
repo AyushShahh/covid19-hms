@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Covid HMS | Medicine portal
+{% endblock %}
+
+{% block css %}
+<style>
+    /* Reset some default styling */
+    body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Apply basic styling to the container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Style the section */
+    .section {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style the form inputs and buttons */
+    #form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style headings and paragraphs */
+    h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+</style>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="section upload">
+            <h4>Enter your city</h4>
+            <form action="/medicines" id="form" method="post">
+                <input type="text" name="city" placeholder="city name" required>
+                <button type="submit" id="sub" class="button">Submit</button>
+            </form>
+            {% if show %}
+                    <h2>{{ data[0][2] }} city medicine stocks</h2>
+                    {% for item in data %}
+                        <p>Name: {{ item[1] }}, Stock: {{ item[3] }}</p>
+                    {% endfor %}
+            {% else %}
+                <p>No medicines</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
